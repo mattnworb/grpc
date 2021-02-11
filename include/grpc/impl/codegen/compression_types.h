@@ -60,7 +60,7 @@ typedef enum {
   GRPC_COMPRESS_GZIP,
   /* EXPERIMENTAL: Stream compression is currently experimental. */
   GRPC_COMPRESS_STREAM_GZIP,
-  /* TODO(ctiller): snappy */
+  GRPC_COMPRESS_SNAPPY,
   GRPC_COMPRESS_ALGORITHMS_COUNT
 } grpc_compression_algorithm;
 

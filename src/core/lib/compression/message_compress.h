@@ -25,6 +25,8 @@
 
 #include "src/core/lib/compression/compression_internal.h"
 
+// NOTE (mattbrown): main compression/decompression happens here!
+
 /* compress 'input' to 'output' using 'algorithm'.
    On success, appends compressed slices to output and returns 1.
    On failure, appends uncompressed slices to output and returns 0. */
