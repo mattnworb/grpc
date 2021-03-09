@@ -73,6 +73,7 @@ CONFIG = [
     'deflate',
     'gzip',
     'stream/gzip',
+    'snappy',
     # metadata elements
     # begin hpack static elements
     (':authority', ''),
@@ -186,6 +187,7 @@ COMPRESSION_ALGORITHMS = [
     'identity',
     'deflate',
     'gzip',
+    'snappy',
 ]
 
 STREAM_COMPRESSION_ALGORITHMS = [
