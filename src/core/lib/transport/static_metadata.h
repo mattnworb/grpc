@@ -327,7 +327,7 @@ inline grpc_core::StaticSliceRefcount* grpc_static_metadata_refcounts() {
   (reinterpret_cast<grpc_core::StaticSliceRefcount*>((static_slice).refcount) \
        ->index)
 
-#define GRPC_STATIC_MDELEM_COUNT 93
+#define GRPC_STATIC_MDELEM_COUNT 95
 
 namespace grpc_core {
 extern StaticMetadata* g_static_mdelem_table;
@@ -491,77 +491,82 @@ extern uintptr_t grpc_static_mdelem_user_data[GRPC_STATIC_MDELEM_COUNT];
 #define GRPC_MDELEM_GRPC_ENCODING_GZIP (grpc_static_mdelem_manifested()[65])
 /* "grpc-encoding": "deflate" */
 #define GRPC_MDELEM_GRPC_ENCODING_DEFLATE (grpc_static_mdelem_manifested()[66])
+/* "grpc-encoding": "snappy" */
+#define GRPC_MDELEM_GRPC_ENCODING_SNAPPY (grpc_static_mdelem_manifested()[67])
 /* "te": "trailers" */
-#define GRPC_MDELEM_TE_TRAILERS (grpc_static_mdelem_manifested()[67])
+#define GRPC_MDELEM_TE_TRAILERS (grpc_static_mdelem_manifested()[68])
 /* "content-type": "application/grpc" */
 #define GRPC_MDELEM_CONTENT_TYPE_APPLICATION_SLASH_GRPC \
-  (grpc_static_mdelem_manifested()[68])
+  (grpc_static_mdelem_manifested()[69])
 /* ":scheme": "grpc" */
-#define GRPC_MDELEM_SCHEME_GRPC (grpc_static_mdelem_manifested()[69])
+#define GRPC_MDELEM_SCHEME_GRPC (grpc_static_mdelem_manifested()[70])
 /* ":method": "PUT" */
-#define GRPC_MDELEM_METHOD_PUT (grpc_static_mdelem_manifested()[70])
+#define GRPC_MDELEM_METHOD_PUT (grpc_static_mdelem_manifested()[71])
 /* "accept-encoding": "" */
-#define GRPC_MDELEM_ACCEPT_ENCODING_EMPTY (grpc_static_mdelem_manifested()[71])
+#define GRPC_MDELEM_ACCEPT_ENCODING_EMPTY (grpc_static_mdelem_manifested()[72])
 /* "content-encoding": "identity" */
 #define GRPC_MDELEM_CONTENT_ENCODING_IDENTITY \
-  (grpc_static_mdelem_manifested()[72])
+  (grpc_static_mdelem_manifested()[73])
 /* "content-encoding": "gzip" */
-#define GRPC_MDELEM_CONTENT_ENCODING_GZIP (grpc_static_mdelem_manifested()[73])
+#define GRPC_MDELEM_CONTENT_ENCODING_GZIP (grpc_static_mdelem_manifested()[74])
+/* "content-encoding": "snappy" */
+#define GRPC_MDELEM_CONTENT_ENCODING_SNAPPY \
+  (grpc_static_mdelem_manifested()[75])
 /* "lb-cost-bin": "" */
-#define GRPC_MDELEM_LB_COST_BIN_EMPTY (grpc_static_mdelem_manifested()[74])
+#define GRPC_MDELEM_LB_COST_BIN_EMPTY (grpc_static_mdelem_manifested()[76])
 /* "grpc-accept-encoding": "identity" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY \
-  (grpc_static_mdelem_manifested()[75])
+  (grpc_static_mdelem_manifested()[77])
 /* "grpc-accept-encoding": "deflate" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE \
-  (grpc_static_mdelem_manifested()[76])
+  (grpc_static_mdelem_manifested()[78])
 /* "grpc-accept-encoding": "identity,deflate" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE \
-  (grpc_static_mdelem_manifested()[77])
+  (grpc_static_mdelem_manifested()[79])
 /* "grpc-accept-encoding": "gzip" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_GZIP \
-  (grpc_static_mdelem_manifested()[78])
+  (grpc_static_mdelem_manifested()[80])
 /* "grpc-accept-encoding": "identity,gzip" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP \
-  (grpc_static_mdelem_manifested()[79])
+  (grpc_static_mdelem_manifested()[81])
 /* "grpc-accept-encoding": "deflate,gzip" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_GZIP \
-  (grpc_static_mdelem_manifested()[80])
+  (grpc_static_mdelem_manifested()[82])
 /* "grpc-accept-encoding": "identity,deflate,gzip" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_GZIP \
-  (grpc_static_mdelem_manifested()[81])
+  (grpc_static_mdelem_manifested()[83])
 /* "grpc-accept-encoding": "snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_SNAPPY \
-  (grpc_static_mdelem_manifested()[82])
+  (grpc_static_mdelem_manifested()[84])
 /* "grpc-accept-encoding": "identity,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[83])
+  (grpc_static_mdelem_manifested()[85])
 /* "grpc-accept-encoding": "deflate,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[84])
+  (grpc_static_mdelem_manifested()[86])
 /* "grpc-accept-encoding": "identity,deflate,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[85])
+  (grpc_static_mdelem_manifested()[87])
 /* "grpc-accept-encoding": "gzip,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_GZIP_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[86])
+  (grpc_static_mdelem_manifested()[88])
 /* "grpc-accept-encoding": "identity,gzip,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[87])
+  (grpc_static_mdelem_manifested()[89])
 /* "grpc-accept-encoding": "deflate,gzip,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_GZIP_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[88])
+  (grpc_static_mdelem_manifested()[90])
 /* "grpc-accept-encoding": "identity,deflate,gzip,snappy" */
 #define GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_GZIP_COMMA_SNAPPY \
-  (grpc_static_mdelem_manifested()[89])
+  (grpc_static_mdelem_manifested()[91])
 /* "accept-encoding": "identity" */
 #define GRPC_MDELEM_ACCEPT_ENCODING_IDENTITY \
-  (grpc_static_mdelem_manifested()[90])
+  (grpc_static_mdelem_manifested()[92])
 /* "accept-encoding": "gzip" */
-#define GRPC_MDELEM_ACCEPT_ENCODING_GZIP (grpc_static_mdelem_manifested()[91])
+#define GRPC_MDELEM_ACCEPT_ENCODING_GZIP (grpc_static_mdelem_manifested()[93])
 /* "accept-encoding": "identity,gzip" */
 #define GRPC_MDELEM_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP \
-  (grpc_static_mdelem_manifested()[92])
+  (grpc_static_mdelem_manifested()[94])
 
 grpc_mdelem grpc_static_mdelem_for_static_strings(intptr_t a, intptr_t b);
 typedef enum {

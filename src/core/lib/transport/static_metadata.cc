@@ -647,132 +647,141 @@ struct StaticMetadataCtx {
           grpc_core::StaticMetadataSlice(&refcounts[40].base, 7, g_bytes + 819),
           66),
       StaticMetadata(
+          grpc_core::StaticMetadataSlice(&refcounts[9].base, 13, g_bytes + 77),
+          grpc_core::StaticMetadataSlice(&refcounts[43].base, 6, g_bytes + 841),
+          67),
+      StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[5].base, 2, g_bytes + 36),
           grpc_core::StaticMetadataSlice(&refcounts[102].base, 8,
                                          g_bytes + 1386),
-          67),
+          68),
       StaticMetadata(grpc_core::StaticMetadataSlice(&refcounts[14].base, 12,
                                                     g_bytes + 158),
                      grpc_core::StaticMetadataSlice(&refcounts[103].base, 16,
                                                     g_bytes + 1394),
-                     68),
+                     69),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[4].base, 7, g_bytes + 29),
           grpc_core::StaticMetadataSlice(&refcounts[104].base, 4,
                                          g_bytes + 1410),
-          69),
+          70),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[1].base, 7, g_bytes + 5),
           grpc_core::StaticMetadataSlice(&refcounts[105].base, 3,
                                          g_bytes + 1414),
-          70),
+          71),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[16].base, 15,
                                          g_bytes + 186),
           grpc_core::StaticMetadataSlice(&refcounts[29].base, 0, g_bytes + 373),
-          71),
+          72),
       StaticMetadata(grpc_core::StaticMetadataSlice(&refcounts[15].base, 16,
                                                     g_bytes + 170),
                      grpc_core::StaticMetadataSlice(&refcounts[101].base, 8,
                                                     g_bytes + 1378),
-                     72),
+                     73),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[15].base, 16,
                                          g_bytes + 170),
           grpc_core::StaticMetadataSlice(&refcounts[41].base, 4, g_bytes + 826),
-          73),
+          74),
+      StaticMetadata(
+          grpc_core::StaticMetadataSlice(&refcounts[15].base, 16,
+                                         g_bytes + 170),
+          grpc_core::StaticMetadataSlice(&refcounts[43].base, 6, g_bytes + 841),
+          75),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[106].base, 11,
                                          g_bytes + 1417),
           grpc_core::StaticMetadataSlice(&refcounts[29].base, 0, g_bytes + 373),
-          74),
+          76),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[101].base, 8,
                                          g_bytes + 1378),
-          75),
+          77),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[40].base, 7, g_bytes + 819),
-          76),
+          78),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[107].base, 16,
                                          g_bytes + 1428),
-          77),
+          79),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[41].base, 4, g_bytes + 826),
-          78),
+          80),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[108].base, 13,
                                          g_bytes + 1444),
-          79),
+          81),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[109].base, 12,
                                          g_bytes + 1457),
-          80),
+          82),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[110].base, 21,
                                          g_bytes + 1469),
-          81),
+          83),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[43].base, 6, g_bytes + 841),
-          82),
+          84),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[111].base, 15,
                                          g_bytes + 1490),
-          83),
+          85),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[112].base, 14,
                                          g_bytes + 1505),
-          84),
+          86),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[113].base, 23,
                                          g_bytes + 1519),
-          85),
+          87),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[114].base, 11,
                                          g_bytes + 1542),
-          86),
+          88),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[115].base, 20,
                                          g_bytes + 1553),
-          87),
+          89),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[116].base, 19,
                                          g_bytes + 1573),
-          88),
+          90),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[10].base, 20, g_bytes + 90),
           grpc_core::StaticMetadataSlice(&refcounts[117].base, 28,
                                          g_bytes + 1592),
-          89),
+          91),
       StaticMetadata(grpc_core::StaticMetadataSlice(&refcounts[16].base, 15,
                                                     g_bytes + 186),
                      grpc_core::StaticMetadataSlice(&refcounts[101].base, 8,
                                                     g_bytes + 1378),
-                     90),
+                     92),
       StaticMetadata(
           grpc_core::StaticMetadataSlice(&refcounts[16].base, 15,
                                          g_bytes + 186),
           grpc_core::StaticMetadataSlice(&refcounts[41].base, 4, g_bytes + 826),
-          91),
+          93),
       StaticMetadata(grpc_core::StaticMetadataSlice(&refcounts[16].base, 15,
                                                     g_bytes + 186),
                      grpc_core::StaticMetadataSlice(&refcounts[108].base, 13,
                                                     g_bytes + 1444),
-                     92),
+                     94),
   };
 
   /* Warning: the core static metadata currently operates under the soft
@@ -1119,135 +1128,145 @@ struct StaticMetadataCtx {
     GRPC_MAKE_MDELEM(
         &static_mdelem_table[66].data(),
         GRPC_MDELEM_STORAGE_STATIC),
+    /* GRPC_MDELEM_GRPC_ENCODING_SNAPPY: 
+     "grpc-encoding": "snappy" */
+    GRPC_MAKE_MDELEM(
+        &static_mdelem_table[67].data(),
+        GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_TE_TRAILERS: 
      "te": "trailers" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[67].data(),
+        &static_mdelem_table[68].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_CONTENT_TYPE_APPLICATION_SLASH_GRPC: 
      "content-type": "application/grpc" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[68].data(),
+        &static_mdelem_table[69].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_SCHEME_GRPC: 
      ":scheme": "grpc" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[69].data(),
+        &static_mdelem_table[70].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_METHOD_PUT: 
      ":method": "PUT" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[70].data(),
+        &static_mdelem_table[71].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_ACCEPT_ENCODING_EMPTY: 
      "accept-encoding": "" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[71].data(),
+        &static_mdelem_table[72].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_CONTENT_ENCODING_IDENTITY: 
      "content-encoding": "identity" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[72].data(),
+        &static_mdelem_table[73].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_CONTENT_ENCODING_GZIP: 
      "content-encoding": "gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[73].data(),
+        &static_mdelem_table[74].data(),
+        GRPC_MDELEM_STORAGE_STATIC),
+    /* GRPC_MDELEM_CONTENT_ENCODING_SNAPPY: 
+     "content-encoding": "snappy" */
+    GRPC_MAKE_MDELEM(
+        &static_mdelem_table[75].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_LB_COST_BIN_EMPTY: 
      "lb-cost-bin": "" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[74].data(),
+        &static_mdelem_table[76].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY: 
      "grpc-accept-encoding": "identity" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[75].data(),
+        &static_mdelem_table[77].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE: 
      "grpc-accept-encoding": "deflate" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[76].data(),
+        &static_mdelem_table[78].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE: 
      "grpc-accept-encoding": "identity,deflate" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[77].data(),
+        &static_mdelem_table[79].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_GZIP: 
      "grpc-accept-encoding": "gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[78].data(),
+        &static_mdelem_table[80].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP: 
      "grpc-accept-encoding": "identity,gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[79].data(),
+        &static_mdelem_table[81].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_GZIP: 
      "grpc-accept-encoding": "deflate,gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[80].data(),
+        &static_mdelem_table[82].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_GZIP: 
      "grpc-accept-encoding": "identity,deflate,gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[81].data(),
+        &static_mdelem_table[83].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_SNAPPY: 
      "grpc-accept-encoding": "snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[82].data(),
+        &static_mdelem_table[84].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_SNAPPY: 
      "grpc-accept-encoding": "identity,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[83].data(),
+        &static_mdelem_table[85].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_SNAPPY: 
      "grpc-accept-encoding": "deflate,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[84].data(),
+        &static_mdelem_table[86].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_SNAPPY: 
      "grpc-accept-encoding": "identity,deflate,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[85].data(),
+        &static_mdelem_table[87].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_GZIP_COMMA_SNAPPY: 
      "grpc-accept-encoding": "gzip,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[86].data(),
+        &static_mdelem_table[88].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP_COMMA_SNAPPY: 
      "grpc-accept-encoding": "identity,gzip,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[87].data(),
+        &static_mdelem_table[89].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_DEFLATE_COMMA_GZIP_COMMA_SNAPPY: 
      "grpc-accept-encoding": "deflate,gzip,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[88].data(),
+        &static_mdelem_table[90].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_GRPC_ACCEPT_ENCODING_IDENTITY_COMMA_DEFLATE_COMMA_GZIP_COMMA_SNAPPY: 
      "grpc-accept-encoding": "identity,deflate,gzip,snappy" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[89].data(),
+        &static_mdelem_table[91].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_ACCEPT_ENCODING_IDENTITY: 
      "accept-encoding": "identity" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[90].data(),
+        &static_mdelem_table[92].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_ACCEPT_ENCODING_GZIP: 
      "accept-encoding": "gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[91].data(),
+        &static_mdelem_table[93].data(),
         GRPC_MDELEM_STORAGE_STATIC),
     /* GRPC_MDELEM_ACCEPT_ENCODING_IDENTITY_COMMA_GZIP: 
      "accept-encoding": "identity,gzip" */
     GRPC_MAKE_MDELEM(
-        &static_mdelem_table[92].data(),
+        &static_mdelem_table[94].data(),
         GRPC_MDELEM_STORAGE_STATIC)
       // clang-format on
   };
@@ -1289,21 +1308,20 @@ void grpc_destroy_static_metadata_ctx(void) {
 }
 
 uintptr_t grpc_static_mdelem_user_data[GRPC_STATIC_MDELEM_COUNT] = {
-    0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 2,
-    4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14, 16, 16, 2, 4, 4};
+    0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0,
+    0, 2, 4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14, 16, 16, 2, 4, 4};
 
 static const int8_t elems_r[] = {
-    32,  -2,  1,   34,  -22, -50, 0,   3,   0,   -22, -26, -3, 0,  0,
-    -30, 1,   -32, -5,  0,   -59, -64, 0,   0,   0,   0,   0,  0,  0,
-    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,  0,
-    0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  0,  0,
-    0,   0,   0,   -61, 0,   0,   60,  51,  67,  38,  40,  11, 6,  1,
-    -4,  -9,  -13, -18, -23, -28, -33, -38, -43, -48, -53, 0,  59, 55,
-    51,  46,  41,  36,  31,  26,  21,  16,  12,  8,   3,   -2, -6, -11,
-    -16, -21, -26, 0,   83,  78,  73,  0,   0,   0,   0,   0,  0,  32};
+    34,  20, 1,   35,  0,   -49, 0,  7,  0,   -47, -24, -3,  0,   0,   -29, -26,
+    -28, -7, 0,   -57, -62, 0,   0,  0,  0,   0,   0,   0,   0,   0,   0,   0,
+    0,   0,  0,   0,   0,   0,   0,  0,  0,   0,   0,   0,   0,   0,   0,   0,
+    0,   0,  0,   0,   0,   0,   0,  0,  0,   0,   0,   -59, 0,   0,   64,  57,
+    70,  41, 43,  12,  7,   2,   -3, -7, -12, -17, -21, -26, -31, -36, -41, -46,
+    -51, 0,  63,  58,  54,  49,  44, 39, 34,  29,  24,  19,  14,  9,   4,   0,
+    -3,  -7, -12, -17, -22, 0,   85, 80, 75,  0,   0,   0,   0,   0,   0,   34};
 static uint32_t elems_phash(uint32_t i) {
   i -= 46;
   uint32_t x = i % 112;
@@ -1317,23 +1335,24 @@ static uint32_t elems_phash(uint32_t i) {
 }
 
 static const uint16_t elem_keys[] = {
-    1281,  1871,  162,   163,   520,   521,   1287, 1288,  1289,  1290,
-    1291,  1292,  1293,  1294,  1295,  1296,  1297, 286,   287,   288,
-    289,   290,   291,   292,   851,   852,   1102, 1103,  1220,  1221,
-    1755,  1223,  46,    47,    1989,  383,   692,  1681,  2271,  2389,
-    6755,  1996,  7581,  7699,  7817,  7935,  8053, 1917,  8171,  8289,
-    8407,  8525,  8643,  8761,  8879,  8997,  9115, 7345,  7109,  1929,
-    576,   6991,  9233,  223,   9351,  7463,  9469, 9587,  9705,  9823,
-    9941,  10059, 10177, 10295, 1799,  10413, 1946, 10531, 10649, 10767,
-    7227,  10885, 11003, 11121, 11239, 11357, 1811, 1163,  11475, 11593,
-    11711, 12537, 0,     0,     0,     0,     0,    0,     0,     926};
+    1281,  1102,  1103,  1755,  1105,  1871,  1287, 1288,  1289,  1290,  1291,
+    1292,  1293,  1294,  1295,  1296,  1297,  286,  287,   288,   289,   290,
+    291,   292,   162,   163,   520,   521,   851,  852,   1220,  1221,  1989,
+    1223,  46,    47,    383,   692,   1681,  1996, 2271,  2389,  6755,  7581,
+    7699,  7817,  7935,  1799,  8053,  8171,  8289, 1917,  8407,  8525,  8643,
+    8761,  8879,  8997,  9115,  1811,  7345,  1813, 1163,  1929,  7109,  6991,
+    9233,  9351,  7463,  9469,  9587,  9705,  9823, 9941,  10059, 10177, 10295,
+    10413, 10531, 10649, 1946,  10767, 576,   7227, 10885, 223,   11003, 11121,
+    11239, 11357, 11475, 11593, 11711, 12537, 0,    0,     0,     0,     0,
+    0,     0,     0,     0,     926};
 static const uint8_t elem_idxs[] = {
-    75, 72, 1,  2,  5,  6,  77, 79,  80,  81,  83,  84,  85,  86,  87, 88, 89,
-    7,  8,  9,  10, 11, 12, 13, 62,  63,  66,  65,  76,  78,  68,  82, 3,  4,
-    90, 0,  67, 30, 57, 37, 14, 92,  21,  22,  23,  24,  26,  71,  27, 28, 29,
-    31, 32, 33, 34, 35, 36, 19, 17,  91,  69,  16,  38,  70,  39,  20, 40, 41,
-    42, 43, 44, 45, 46, 47, 25, 48,  15,  49,  50,  51,  18,  52,  53, 54, 55,
-    56, 73, 64, 58, 59, 60, 74, 255, 255, 255, 255, 255, 255, 255, 61};
+    77, 66, 65, 69, 67,  73,  79,  81,  82,  83,  85,  86,  87,  88, 89,
+    90, 91, 7,  8,  9,   10,  11,  12,  13,  1,   2,   5,   6,   62, 63,
+    78, 80, 92, 84, 3,   4,   0,   68,  30,  94,  57,  37,  14,  21, 22,
+    23, 24, 25, 26, 27,  28,  72,  29,  31,  32,  33,  34,  35,  36, 74,
+    19, 75, 64, 93, 17,  16,  38,  39,  20,  40,  41,  42,  43,  44, 45,
+    46, 47, 48, 49, 50,  15,  51,  70,  18,  52,  71,  53,  54,  55, 56,
+    58, 59, 60, 76, 255, 255, 255, 255, 255, 255, 255, 255, 255, 61};
 
 grpc_mdelem grpc_static_mdelem_for_static_strings(intptr_t a, intptr_t b) {
   if (a == -1 || b == -1) return GRPC_MDNULL;
@@ -1348,6 +1367,6 @@ grpc_mdelem grpc_static_mdelem_for_static_strings(intptr_t a, intptr_t b) {
 }
 
 const uint8_t grpc_static_accept_encoding_metadata[16] = {
-    0, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89};
+    0, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91};
 
-const uint8_t grpc_static_accept_stream_encoding_metadata[4] = {0, 90, 91, 92};
+const uint8_t grpc_static_accept_stream_encoding_metadata[4] = {0, 92, 93, 94};
