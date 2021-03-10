@@ -31,10 +31,10 @@
 
 static void test_compression_algorithm_parse(void) {
   size_t i;
-  const char* valid_names[] = {"identity", "gzip", "deflate", "stream/gzip"};
+  const char* valid_names[] = {"identity", "gzip", "deflate", "snappy", "stream/gzip"};
   const grpc_compression_algorithm valid_algorithms[] = {
       GRPC_COMPRESS_NONE, GRPC_COMPRESS_GZIP, GRPC_COMPRESS_DEFLATE,
-      GRPC_COMPRESS_STREAM_GZIP};
+      GRPC_COMPRESS_SNAPPY, GRPC_COMPRESS_STREAM_GZIP};
   const char* invalid_names[] = {"gzip2", "foo", "", "2gzip"};
 
   gpr_log(GPR_DEBUG, "test_compression_algorithm_parse");
