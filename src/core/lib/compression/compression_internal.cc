@@ -147,6 +147,7 @@ int grpc_compression_algorithm_from_message_stream_compression_algorithm(
     *algorithm = GRPC_COMPRESS_NONE;
     return 0;
   }
+  // (mattbrown) one or both of message_algorithm and stream_algorithm is NONE
   if (message_algorithm == GRPC_MESSAGE_COMPRESS_NONE) {
     switch (stream_algorithm) {
       case GRPC_STREAM_COMPRESS_NONE:

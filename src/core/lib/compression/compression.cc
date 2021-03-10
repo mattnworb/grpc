@@ -92,6 +92,7 @@ int grpc_compression_algorithm_name(grpc_compression_algorithm algorithm,
   return 0;
 }
 
+// (mattbrown) this is failing compression_test.cc
 grpc_compression_algorithm grpc_compression_algorithm_for_level(
     grpc_compression_level level, uint32_t accepted_encodings) {
   grpc_compression_algorithm algo;

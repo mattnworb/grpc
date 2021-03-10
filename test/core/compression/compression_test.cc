@@ -187,6 +187,7 @@ static void test_compression_algorithm_for_level(void) {
                grpc_compression_algorithm_for_level(GRPC_COMPRESS_LEVEL_NONE,
                                                     accepted_encodings));
 
+    // this is returning gzip?
     GPR_ASSERT(GRPC_COMPRESS_NONE ==
                grpc_compression_algorithm_for_level(GRPC_COMPRESS_LEVEL_LOW,
                                                     accepted_encodings));

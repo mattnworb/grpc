@@ -159,6 +159,7 @@ static int compress_inner(grpc_message_compression_algorithm algorithm,
       return zlib_compress(input, output, 0);
     case GRPC_MESSAGE_COMPRESS_GZIP:
       return zlib_compress(input, output, 1);
+    // TODO (mattbrown) add snappy here
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
@@ -184,6 +185,7 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
       return zlib_decompress(input, output, 0);
     case GRPC_MESSAGE_COMPRESS_GZIP:
       return zlib_decompress(input, output, 1);
+    // TODO (mattbrown) add snappy here
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
