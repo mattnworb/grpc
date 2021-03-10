@@ -118,7 +118,15 @@ grpc_compression_algorithm_to_stream_compression_algorithm(
   }
 }
 
+// (mattbrown) this has to convert a bitset of all possible compression values to one of just message compression values
 uint32_t grpc_compression_bitset_to_message_bitset(uint32_t bitset) {
+  //              43210
+  // bitset = 9 = 01001
+  //
+  // (1 << count) - 1
+  //              10000
+  //              01111
+  // the second part of this expression sets the top bit to 0 always, where GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT is
   return bitset & ((1u << GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT) - 1);
 }
 
@@ -253,6 +261,17 @@ grpc_message_compression_algorithm grpc_message_compression_algorithm_for_level(
     }
     if (algos_supported_idx == num_supported) break;
   }
+
+  // (mattbrown) this is translating low/med/high to positions in the array (??)
+  // GRPC_API_TRACE("grpc_message_compression_algorithm_for_level sorted_supported_algos=%s", 1,
+  //                (sorted_supported_algos));
+
+  //
+  // (gdb) print sorted_supported_algos
+  // $2 = {GRPC_MESSAGE_COMPRESS_GZIP, GRPC_MESSAGE_COMPRESS_DEFLATE, GRPC_MESSAGE_COMPRESS_DEFLATE, GRPC_MESSAGE_COMPRESS_NONE}
+  //
+  // is the bitset wrong now?
+  // try to run test w/o changes, breaking at test/core/compression/compression_test.cc:191
 
   switch (level) {
     case GRPC_COMPRESS_LEVEL_NONE:
