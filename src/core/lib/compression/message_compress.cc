@@ -145,26 +145,31 @@ static int zlib_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output,
 
 class SliceBufferSource : public ::snappy::Source {
  public:
-  explicit SliceBufferSource(grpc_slice_buffer* input) : input_(input) {}
+  explicit SliceBufferSource(grpc_slice_buffer* input) : input_(input) {
+    this->left_ = input_->length;
+  }
 
-  size_t Available() const override { return input_->length; }
+  size_t Available() const override { return left_; }
 
-  const char* Peek(size_t* len) override { return ""; }
+  const char* Peek(size_t* len) override {
+    *len = left_;
+    // todo (mattbrown) I think this should return one slice at a time
+    return (char*)GRPC_SLICE_START_PTR(input_->slices[0]);
+  }
 
-  // Skip the next n bytes.  Invalidates any buffer returned by
-  // a previous call to Peek().
-  // REQUIRES: Available() >= n
-  void Skip(size_t n) override {}
+  void Skip(size_t n) override { left_ -= n; }
 
  private:
   grpc_slice_buffer* input_;
+  size_t left_;
 };
 
 class SliceBufferSink : public ::snappy::Sink {
  public:
   explicit SliceBufferSink(grpc_slice_buffer* output) : output_(output) {}
+
   void Append(const char* bytes, size_t n) override {
-    // TODO
+    grpc_slice_buffer_add(output_, grpc_slice_from_copied_buffer(bytes, n));
   }
 
  private:
@@ -175,16 +180,44 @@ static int snappy_compress(grpc_slice_buffer* input,
                            grpc_slice_buffer* output) {
   SliceBufferSource source(input);
   SliceBufferSink sink(output);
-  snappy::Compress(&source, &sink);
-  return 1;
+
+  size_t bytes_written = snappy::Compress(&source, &sink);
+
+  // if we return 0 here, the outer function calls copy(input, output), which
+  // appends input to output, but does not clear it
+  //
+  // after running snappy::Compress with an input of a single byte for 'a' the
+  // output has a length of 3 and then copy(input, output) appends input back to
+  // it, leaving a length of 4.
+  //
+  // what is the point of that copy() function? how does it work for zlib case?
+  //
+  // the test expects that for "small" data, no compression happens - the outer
+  // function `grpc_msg_compress` should return 0
+  //
+  // can I clear output?
+
+  // return bytes_written < input->length ? 1 : 0;
+
+  if (bytes_written < input->length) {
+    return 1;
+  } else {
+    grpc_slice_buffer_reset_and_unref(output);
+    return 0;
+  }
 }
 
 static int snappy_decompress(grpc_slice_buffer* input,
                              grpc_slice_buffer* output) {
   SliceBufferSource source(input);
   SliceBufferSink sink(output);
-  snappy::Uncompress(&source, &sink);
-  return 1;
+
+  // when input is 1KB of "a", this is returning a 0 (haven't gotten to other
+  // test cases yet).
+  //
+  // why? is my sink broken?
+  int r = snappy::Uncompress(&source, &sink);
+  return r;
 }
 
 static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
