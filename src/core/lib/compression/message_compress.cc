@@ -154,6 +154,17 @@ class SliceBufferSource : public ::snappy::Source {
   const char* Peek(size_t* len) override {
     *len = left_;
     // todo (mattbrown) I think this should return one slice at a time
+    //
+    // theres a bug here:
+    //
+    // - in snappy::Uncompress, it constructs a SnappyDecompressor(compressed)
+    //   and then calls decompressor.ReadUncompressLength(&uncompressed_len).
+    // - ReadUncompressLength calls Peek() and Skip(1) to "read the uncompressed
+    //   length stored at the start of the compressed data".
+    //
+    // so while Skip(size_t) below is moving the left_ value correctly, that
+    // should be included here somehow to give a pointer to the next value -
+    // right now this returns the same value repeatedly on each call.
     return (char*)GRPC_SLICE_START_PTR(input_->slices[0]);
   }
 
