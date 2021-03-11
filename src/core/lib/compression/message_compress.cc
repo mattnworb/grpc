@@ -27,8 +27,8 @@
 
 #include <zlib.h>
 
-#include <snappy-sinksource.h>
-#include <snappy.h>
+#include "snappy-sinksource.h"
+#include "snappy.h"
 
 #include "src/core/lib/slice/slice_internal.h"
 
