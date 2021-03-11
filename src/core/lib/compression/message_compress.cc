@@ -27,6 +27,9 @@
 
 #include <zlib.h>
 
+#include <snappy-sinksource.h>
+#include <snappy.h>
+
 #include "src/core/lib/slice/slice_internal.h"
 
 #define OUTPUT_BLOCK_SIZE 1024
@@ -140,6 +143,50 @@ static int zlib_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output,
   return r;
 }
 
+class SliceBufferSource : public ::snappy::Source {
+ public:
+  explicit SliceBufferSource(grpc_slice_buffer* input) : input_(input) {}
+
+  size_t Available() const override { return input_->length; }
+
+  const char* Peek(size_t* len) override { return ""; }
+
+  // Skip the next n bytes.  Invalidates any buffer returned by
+  // a previous call to Peek().
+  // REQUIRES: Available() >= n
+  void Skip(size_t n) override {}
+
+ private:
+  grpc_slice_buffer* input_;
+};
+
+class SliceBufferSink : public ::snappy::Sink {
+ public:
+  explicit SliceBufferSink(grpc_slice_buffer* output) : output_(output) {}
+  void Append(const char* bytes, size_t n) override {
+    // TODO
+  }
+
+ private:
+  grpc_slice_buffer* output_;
+};
+
+static int snappy_compress(grpc_slice_buffer* input,
+                           grpc_slice_buffer* output) {
+  SliceBufferSource source(input);
+  SliceBufferSink sink(output);
+  snappy::Compress(&source, &sink);
+  return 1;
+}
+
+static int snappy_decompress(grpc_slice_buffer* input,
+                             grpc_slice_buffer* output) {
+  SliceBufferSource source(input);
+  SliceBufferSink sink(output);
+  snappy::Uncompress(&source, &sink);
+  return 1;
+}
+
 static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
   size_t i;
   for (i = 0; i < input->count; i++) {
@@ -159,7 +206,8 @@ static int compress_inner(grpc_message_compression_algorithm algorithm,
       return zlib_compress(input, output, 0);
     case GRPC_MESSAGE_COMPRESS_GZIP:
       return zlib_compress(input, output, 1);
-    // TODO (mattbrown) add snappy here
+    case GRPC_MESSAGE_COMPRESS_SNAPPY:
+      return snappy_compress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
@@ -185,7 +233,8 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
       return zlib_decompress(input, output, 0);
     case GRPC_MESSAGE_COMPRESS_GZIP:
       return zlib_decompress(input, output, 1);
-    // TODO (mattbrown) add snappy here
+    case GRPC_MESSAGE_COMPRESS_SNAPPY:
+      return snappy_decompress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
