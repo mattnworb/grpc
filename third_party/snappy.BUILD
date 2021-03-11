@@ -18,8 +18,6 @@ cc_library(
     "snappy.cc",
   ],
   copts = [
-#    "-Ithird_party/snappy/linux-k8",
-#    "-DHAVE_CONFIG_H",
     "-Wno-unused-function"
   ],
   deps = [
