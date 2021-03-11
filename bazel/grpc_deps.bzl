@@ -183,6 +183,7 @@ def grpc_deps():
             sha256 = "bc6a9ac9d7f398e627fbb80f5b5db0fd7247950d22398c1834a48bef5ecb3437",
             strip_prefix = "snappy-537f4ad6240e586970fe554614542e9717df7902",
             urls = [
+                # git tag: 1.1.8
                 "https://github.com/google/snappy/archive/537f4ad6240e586970fe554614542e9717df7902.tar.gz",
             ],
         )
