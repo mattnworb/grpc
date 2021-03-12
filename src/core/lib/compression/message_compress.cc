@@ -165,8 +165,12 @@ class SliceBufferSource : public ::snappy::Source {
   // Peek at the next flat region of the source.  Does not reposition
   // the source.  The returned region is empty iff Available()==0.
   const char* Peek(size_t* len) override {
-    *len = GRPC_SLICE_LENGTH(input_->slices[current_slice_index_]) -
-           current_slice_pos_;
+    if (total_remaining_ > 0) {
+      *len = GRPC_SLICE_LENGTH(input_->slices[current_slice_index_]) -
+             current_slice_pos_;
+    } else {
+      *len = 0;
+    }
 
     return reinterpret_cast<char*>(
         GRPC_SLICE_START_PTR(input_->slices[current_slice_index_]) +
@@ -243,7 +247,8 @@ static int snappy_decompress(grpc_slice_buffer* input,
   SliceBufferSource source(input);
   SliceBufferSink sink(output);
 
-  return snappy::Uncompress(&source, &sink);
+  bool r = snappy::Uncompress(&source, &sink);
+  return r;
 }
 
 static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
