@@ -30,6 +30,7 @@ cc_binary(
     defines = ["BAZEL_BUILD"],
     deps = [
         "//:grpc++",
+        "//:grpc++_reflection",
         "//examples/protos:helloworld_cc_grpc",
     ],
 )
