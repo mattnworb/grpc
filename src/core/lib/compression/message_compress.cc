@@ -165,17 +165,20 @@ class SliceBufferSource : public ::snappy::Source {
   // Peek at the next flat region of the source.  Does not reposition
   // the source.  The returned region is empty iff Available()==0.
   const char* Peek(size_t* len) override {
-    // grpc_slice slice = input_->slices[current_slice_index_];
     *len = GRPC_SLICE_LENGTH(input_->slices[current_slice_index_]) -
            current_slice_pos_;
-    // todo should this be reinterpret_cast?
-    return (char*)(GRPC_SLICE_START_PTR(input_->slices[current_slice_index_]) +
-                   current_slice_pos_);
+
+    return reinterpret_cast<char*>(
+        GRPC_SLICE_START_PTR(input_->slices[current_slice_index_]) +
+        current_slice_pos_);
   }
 
   // Skip the next n bytes.  Invalidates any buffer returned by
   // a previous call to Peek().
   void Skip(size_t n) override {
+    // this could be optimized - instead of moving by 1 at a time, could do
+    // something like while (n > 0), compute how much is left in this slice,
+    // move by that amount, etc.
     while (n > 0) {
       --n;
       --total_remaining_;
