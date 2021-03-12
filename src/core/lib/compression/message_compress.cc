@@ -144,35 +144,52 @@ static int zlib_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output,
 }
 
 class SliceBufferSource : public ::snappy::Source {
+ private:
+  // original buffer
+  grpc_slice_buffer* input_;
+  size_t total_remaining_;
+  size_t current_slice_index_;
+  size_t current_slice_pos_;
+
  public:
   explicit SliceBufferSource(grpc_slice_buffer* input) : input_(input) {
-    this->left_ = input_->length;
+    this->total_remaining_ = input->length;
+    // TODO assert that there is at least one slice?
+    this->current_slice_index_ = 0;
+    this->current_slice_pos_ = 0;
   }
 
-  size_t Available() const override { return left_; }
+  // Return the number of bytes left to read from the source
+  size_t Available() const override { return total_remaining_; }
 
+  // Peek at the next flat region of the source.  Does not reposition
+  // the source.  The returned region is empty iff Available()==0.
   const char* Peek(size_t* len) override {
-    *len = left_;
-    // todo (mattbrown) I think this should return one slice at a time
-    //
-    // theres a bug here:
-    //
-    // - in snappy::Uncompress, it constructs a SnappyDecompressor(compressed)
-    //   and then calls decompressor.ReadUncompressLength(&uncompressed_len).
-    // - ReadUncompressLength calls Peek() and Skip(1) to "read the uncompressed
-    //   length stored at the start of the compressed data".
-    //
-    // so while Skip(size_t) below is moving the left_ value correctly, that
-    // should be included here somehow to give a pointer to the next value -
-    // right now this returns the same value repeatedly on each call.
-    return (char*)GRPC_SLICE_START_PTR(input_->slices[0]);
+    // grpc_slice slice = input_->slices[current_slice_index_];
+    *len = GRPC_SLICE_LENGTH(input_->slices[current_slice_index_]) -
+           current_slice_pos_;
+    // todo should this be reinterpret_cast?
+    return (char*)(GRPC_SLICE_START_PTR(input_->slices[current_slice_index_]) +
+                   current_slice_pos_);
   }
 
-  void Skip(size_t n) override { left_ -= n; }
+  // Skip the next n bytes.  Invalidates any buffer returned by
+  // a previous call to Peek().
+  void Skip(size_t n) override {
+    while (n > 0) {
+      --n;
+      --total_remaining_;
+      ++current_slice_pos_;  // move position forward by 1
 
- private:
-  grpc_slice_buffer* input_;
-  size_t left_;
+      // check if we should move to next slice
+      const size_t current_slice_length =
+          GRPC_SLICE_LENGTH(input_->slices[current_slice_index_]);
+      if (this->current_slice_pos_ >= current_slice_length) {
+        ++current_slice_index_;
+        current_slice_pos_ = 0;
+      }
+    }
+  }
 };
 
 class SliceBufferSink : public ::snappy::Sink {
@@ -223,12 +240,7 @@ static int snappy_decompress(grpc_slice_buffer* input,
   SliceBufferSource source(input);
   SliceBufferSink sink(output);
 
-  // when input is 1KB of "a", this is returning a 0 (haven't gotten to other
-  // test cases yet).
-  //
-  // why? is my sink broken?
-  int r = snappy::Uncompress(&source, &sink);
-  return r;
+  return snappy::Uncompress(&source, &sink);
 }
 
 static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
