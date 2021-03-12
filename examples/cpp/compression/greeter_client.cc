@@ -56,7 +56,7 @@ class GreeterClient {
     ClientContext context;
 
     // Overwrite the call's compression algorithm to DEFLATE.
-    context.set_compression_algorithm(GRPC_COMPRESS_DEFLATE);
+    context.set_compression_algorithm(GRPC_COMPRESS_SNAPPY);
 
     // The actual RPC.
     Status status = stub_->SayHello(&context, request, &reply);
@@ -82,7 +82,7 @@ int main(int argc, char** argv) {
   // (use of InsecureChannelCredentials()).
   ChannelArguments args;
   // Set the default compression algorithm for the channel.
-  args.SetCompressionAlgorithm(GRPC_COMPRESS_GZIP);
+  args.SetCompressionAlgorithm(GRPC_COMPRESS_SNAPPY);
   GreeterClient greeter(grpc::CreateCustomChannel(
       "localhost:50051", grpc::InsecureChannelCredentials(), args));
   std::string user("world world world world");
