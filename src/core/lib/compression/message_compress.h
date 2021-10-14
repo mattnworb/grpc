@@ -25,6 +25,11 @@
 
 #include "src/core/lib/compression/compression_internal.h"
 
+#include <string>
+#include <unordered_map>
+
+//using namespace std;
+
 /* compress 'input' to 'output' using 'algorithm'.
    On success, appends compressed slices to output and returns 1.
    On failure, appends uncompressed slices to output and returns 0. */
@@ -36,5 +41,40 @@ int grpc_msg_compress(grpc_message_compression_algorithm algorithm,
    On failure, output is unchanged, and returns 0. */
 int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
                         grpc_slice_buffer* input, grpc_slice_buffer* output);
+
+/* Copy the input buffer into the output buffer, with no compression. */
+static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output);
+
+class Compressor {
+   // 5 methods
+   // - identity / name of algo
+   // - lifecycle methods: stop and start
+   // - compress message
+   // - decompress message
+
+   public:
+      // TODO: proper return type for plain strings in this codebase
+      virtual std::string encodingType() = 0;
+
+      virtual void start() = 0;
+
+      virtual void stop() = 0;
+
+      virtual int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output) = 0;
+
+      virtual int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output) = 0;
+};
+
+class CompressorRegistry {
+   public:
+      void RegisterCompressor(Compressor* c);
+      void RemoveCompressor(std::string encoding_type);
+   private:
+      
+      std::unordered_map<std::string, Compressor*> compressors;
+
+      CompressorRegistry();
+};
+
 
 #endif /* GRPC_CORE_LIB_COMPRESSION_MESSAGE_COMPRESS_H */

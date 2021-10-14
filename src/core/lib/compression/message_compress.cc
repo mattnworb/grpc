@@ -190,3 +190,22 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
   gpr_log(GPR_ERROR, "invalid compression algorithm %d", algorithm);
   return 0;
 }
+
+// class CompressorRegistry {
+//    public:
+//       void RegisterCompressor(Compressor* c) {
+//         compressors[c.encodingType()] = c;
+//       }
+//       void RemoveCompressor(std::string encoding_type) {
+
+//       }
+
+//    private:
+//       std::unordered_map<std::string, Compressor*> compressors;
+
+//       CompressorRegistry();
+// };
+
+void CompressorRegistry::RegisterCompressor(Compressor* c) {
+  compressors[c->encodingType()] = c;
+}
