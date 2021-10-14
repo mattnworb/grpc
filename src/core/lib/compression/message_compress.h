@@ -66,15 +66,15 @@ class Compressor {
 };
 
 class CompressorRegistry {
-   public:
-      void RegisterCompressor(Compressor* c);
-      void RemoveCompressor(std::string encoding_type);
-   private:
-      
-      std::unordered_map<std::string, Compressor*> compressors;
+ public:
+  CompressorRegistry();
 
-      CompressorRegistry();
+  void register_compressor(Compressor* c);
+  Compressor* get_compressor(std::string encoding_type);
+  void remove_compressor(std::string encoding_type);
+
+ private:
+  std::unordered_map<std::string, Compressor*> compressors;
 };
-
 
 #endif /* GRPC_CORE_LIB_COMPRESSION_MESSAGE_COMPRESS_H */

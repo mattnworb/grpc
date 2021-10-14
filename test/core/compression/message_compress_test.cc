@@ -17,6 +17,7 @@
  */
 
 #include "src/core/lib/compression/message_compress.h"
+#include "src/core/lib/compression/null_compressor.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -310,6 +311,14 @@ static void test_bad_decompression_algorithm(void) {
   grpc_slice_buffer_destroy(&output);
 }
 
+static void test_compressor_registry(void) {
+  CompressorRegistry reg;
+  NullCompressor null_compressor;
+  reg.register_compressor(&null_compressor);
+
+  GPR_ASSERT((Compressor*)&null_compressor == reg.get_compressor("null"));
+}
+
 int main(int argc, char** argv) {
   unsigned i, j, k, m;
   grpc_slice_split_mode uncompressed_split_modes[] = {
@@ -320,6 +329,8 @@ int main(int argc, char** argv) {
 
   grpc::testing::TestEnvironment env(argc, argv);
   grpc_init();
+
+  test_compressor_registry();
 
   for (i = 0; i < GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT; i++) {
     for (j = 0; j < GPR_ARRAY_SIZE(uncompressed_split_modes); j++) {

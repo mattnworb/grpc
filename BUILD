@@ -1562,6 +1562,7 @@ grpc_cc_library(
         "src/core/lib/compression/compression_args.h",
         "src/core/lib/compression/compression_internal.h",
         "src/core/lib/compression/message_compress.h",
+        "src/core/lib/compression/null_compressor.h",
         "src/core/lib/compression/stream_compression.h",
         "src/core/lib/compression/stream_compression_gzip.h",
         "src/core/lib/compression/stream_compression_identity.h",

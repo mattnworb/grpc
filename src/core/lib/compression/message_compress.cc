@@ -191,21 +191,26 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
   return 0;
 }
 
-// class CompressorRegistry {
-//    public:
-//       void RegisterCompressor(Compressor* c) {
-//         compressors[c.encodingType()] = c;
-//       }
-//       void RemoveCompressor(std::string encoding_type) {
 
-//       }
+CompressorRegistry::CompressorRegistry() {
 
-//    private:
-//       std::unordered_map<std::string, Compressor*> compressors;
+}
 
-//       CompressorRegistry();
-// };
+void CompressorRegistry::register_compressor(Compressor* c) {
+  if (compressors.count(c->encodingType()) == 0 ) {
+    compressors[c->encodingType()] = c;
+  } else {
+    throw std::invalid_argument("compressor registered twice!! bad!");
+  }
+}
 
-void CompressorRegistry::RegisterCompressor(Compressor* c) {
-  compressors[c->encodingType()] = c;
+void CompressorRegistry::remove_compressor(std::string encoding_name) {
+  if (compressors.count(encoding_name) == 0 ) {
+    throw std::invalid_argument("compressor not registered ");
+  }
+  compressors.erase(encoding_name);
+}
+
+Compressor* CompressorRegistry::get_compressor(std::string encoding_name) {
+  return compressors[encoding_name];
 }
