@@ -43,7 +43,7 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
                         grpc_slice_buffer* input, grpc_slice_buffer* output);
 
 /* Copy the input buffer into the output buffer, with no compression. */
-static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output);
+int copy(grpc_slice_buffer* input, grpc_slice_buffer* output);
 
 class Compressor {
    // 5 methods

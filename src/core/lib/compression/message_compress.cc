@@ -140,7 +140,7 @@ static int zlib_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output,
   return r;
 }
 
-static int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
   size_t i;
   for (i = 0; i < input->count; i++) {
     grpc_slice_buffer_add(output, grpc_slice_ref_internal(input->slices[i]));
