@@ -26,6 +26,7 @@
 #include <grpc/support/log.h>
 
 #include "src/core/lib/gpr/murmur_hash.h"
+#include "src/core/lib/gpr/string.h"
 #include "src/core/lib/gpr/useful.h"
 #include "src/core/lib/iomgr/exec_ctx.h"
 #include "test/core/util/slice_splitter.h"
@@ -312,11 +313,35 @@ static void test_bad_decompression_algorithm(void) {
 }
 
 static void test_compressor_registry(void) {
-  CompressorRegistry reg;
   NullCompressor null_compressor;
-  reg.register_compressor(&null_compressor);
+  CompressorRegistry::getInstance().register_compressor(&null_compressor);
 
-  GPR_ASSERT((Compressor*)&null_compressor == reg.get_compressor("null"));
+  GPR_ASSERT((Compressor*)&null_compressor == CompressorRegistry::getInstance().get_compressor("null"));
+}
+
+static void test_null_compressor(void) {
+  grpc_slice_buffer input;
+  grpc_slice_buffer output;
+  int was_compressed;
+
+  grpc_slice_buffer_init(&input);
+  grpc_slice_buffer_add(&input, grpc_slice_from_copied_string("test value"));
+
+  grpc_slice_buffer_init(&output);
+
+  NullCompressor null_compressor;
+  was_compressed = null_compressor.msg_compress(&input, &output);
+  GPR_ASSERT(1 == was_compressed);
+
+  // NullCompressor just copies input into output, so the values should be the same
+  GPR_ASSERT(input.count == output.count);
+  // TODO (mattbrown) is there a more conventional way to test equality of two grpc_slice_buffers?
+  for (int i = 0; i < input.count; i++) {
+    GPR_ASSERT(input.slices[i] == output.slices[i]);
+  }
+
+  grpc_slice_buffer_destroy(&input);
+  grpc_slice_buffer_destroy(&output);
 }
 
 int main(int argc, char** argv) {
@@ -331,6 +356,7 @@ int main(int argc, char** argv) {
   grpc_init();
 
   test_compressor_registry();
+  test_null_compressor();
 
   for (i = 0; i < GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT; i++) {
     for (j = 0; j < GPR_ARRAY_SIZE(uncompressed_split_modes); j++) {

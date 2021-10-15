@@ -67,13 +67,20 @@ class Compressor {
 
 class CompressorRegistry {
  public:
-  CompressorRegistry();
+  static CompressorRegistry& getInstance() {
+     static CompressorRegistry instance;
+     return instance;
+  }
 
   void register_compressor(Compressor* c);
   Compressor* get_compressor(std::string encoding_type);
   void remove_compressor(std::string encoding_type);
 
  private:
+  CompressorRegistry() {}
+  CompressorRegistry(CompressorRegistry const&) = delete;
+  void operator=(CompressorRegistry const&) = delete;
+
   std::unordered_map<std::string, Compressor*> compressors;
 };
 

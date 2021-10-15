@@ -192,9 +192,6 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
 }
 
 
-CompressorRegistry::CompressorRegistry() {
-
-}
 
 void CompressorRegistry::register_compressor(Compressor* c) {
   if (compressors.count(c->encodingType()) == 0 ) {
