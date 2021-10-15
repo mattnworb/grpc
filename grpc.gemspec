@@ -770,6 +770,8 @@ Gem::Specification.new do |s|
   s.files += %w( src/core/lib/compression/compression_internal.h )
   s.files += %w( src/core/lib/compression/message_compress.cc )
   s.files += %w( src/core/lib/compression/message_compress.h )
+  s.files += %w( src/core/lib/compression/null_compressor.cc )
+  s.files += %w( src/core/lib/compression/null_compressor.h )
   s.files += %w( src/core/lib/compression/stream_compression.cc )
   s.files += %w( src/core/lib/compression/stream_compression.h )
   s.files += %w( src/core/lib/compression/stream_compression_gzip.cc )
