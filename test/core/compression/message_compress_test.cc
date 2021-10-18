@@ -17,7 +17,6 @@
  */
 
 #include "src/core/lib/compression/message_compress.h"
-#include "src/core/lib/compression/null_compressor.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -25,6 +24,7 @@
 #include <grpc/grpc.h>
 #include <grpc/support/log.h>
 
+#include "src/core/lib/compression/null_compressor.h"
 #include "src/core/lib/gpr/murmur_hash.h"
 #include "src/core/lib/gpr/string.h"
 #include "src/core/lib/gpr/useful.h"
@@ -316,7 +316,8 @@ static void test_compressor_registry(void) {
   NullCompressor null_compressor;
   CompressorRegistry::getInstance().register_compressor(&null_compressor);
 
-  GPR_ASSERT((Compressor*)&null_compressor == CompressorRegistry::getInstance().get_compressor("null"));
+  GPR_ASSERT((Compressor*)&null_compressor ==
+             CompressorRegistry::getInstance().get_compressor("null"));
 }
 
 static void test_null_compressor(void) {
@@ -333,9 +334,11 @@ static void test_null_compressor(void) {
   was_compressed = null_compressor.msg_compress(&input, &output);
   GPR_ASSERT(1 == was_compressed);
 
-  // NullCompressor just copies input into output, so the values should be the same
+  // NullCompressor just copies input into output, so the values should be the
+  // same
   GPR_ASSERT(input.count == output.count);
-  // TODO (mattbrown) is there a more conventional way to test equality of two grpc_slice_buffers?
+  // TODO (mattbrown) is there a more conventional way to test equality of two
+  // grpc_slice_buffers?
   for (int i = 0; i < input.count; i++) {
     GPR_ASSERT(input.slices[i] == output.slices[i]);
   }
