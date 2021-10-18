@@ -210,7 +210,7 @@ Compressor* CompressorRegistry::get_compressor(std::string encoding_name) {
   return compressors[encoding_name];
 }
 
-std::string NoopCompressor::encodingType() { return "null"; }
+std::string NoopCompressor::encodingType() { return "noop"; }
 
 void NoopCompressor::start() {}
 
@@ -224,4 +224,36 @@ int NoopCompressor::msg_compress(grpc_slice_buffer* input,
 int NoopCompressor::msg_decompress(grpc_slice_buffer* input,
                                    grpc_slice_buffer* output) {
   return copy(input, output);
+}
+
+std::string DeflateCompressor::encodingType() { return "deflate"; }
+
+void DeflateCompressor::start() {}
+
+void DeflateCompressor::stop() {}
+
+int DeflateCompressor::msg_compress(grpc_slice_buffer* input,
+                                    grpc_slice_buffer* output) {
+  return zlib_compress(input, output, 0);
+}
+
+int DeflateCompressor::msg_decompress(grpc_slice_buffer* input,
+                                      grpc_slice_buffer* output) {
+  return zlib_decompress(input, output, 0);
+}
+
+std::string GzipCompressor::encodingType() { return "gzip"; }
+
+void GzipCompressor::start() {}
+
+void GzipCompressor::stop() {}
+
+int GzipCompressor::msg_compress(grpc_slice_buffer* input,
+                                 grpc_slice_buffer* output) {
+  return zlib_compress(input, output, 1);
+}
+
+int GzipCompressor::msg_decompress(grpc_slice_buffer* input,
+                                   grpc_slice_buffer* output) {
+  return zlib_decompress(input, output, 1);
 }

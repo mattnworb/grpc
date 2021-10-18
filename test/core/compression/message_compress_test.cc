@@ -312,11 +312,11 @@ static void test_bad_decompression_algorithm(void) {
 }
 
 static void test_compressor_registry(void) {
-  NoopCompressor null_compressor;
-  CompressorRegistry::getInstance().register_compressor(&null_compressor);
-
-  GPR_ASSERT((Compressor*)&null_compressor ==
-             CompressorRegistry::getInstance().get_compressor("null"));
+  // test that the built-in compressors are registered
+  GPR_ASSERT(CompressorRegistry::getInstance().get_compressor("noop") != NULL);
+  GPR_ASSERT(CompressorRegistry::getInstance().get_compressor("deflate") !=
+             NULL);
+  GPR_ASSERT(CompressorRegistry::getInstance().get_compressor("gzip") != NULL);
 }
 
 static void test_noop_compressor(void) {
