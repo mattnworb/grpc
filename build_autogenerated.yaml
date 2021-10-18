@@ -744,6 +744,7 @@ libs:
   - src/core/lib/compression/compression_args.h
   - src/core/lib/compression/compression_internal.h
   - src/core/lib/compression/message_compress.h
+  - src/core/lib/compression/null_compressor.h
   - src/core/lib/compression/stream_compression.h
   - src/core/lib/compression/stream_compression_gzip.h
   - src/core/lib/compression/stream_compression_identity.h
@@ -1287,6 +1288,7 @@ libs:
   - src/core/lib/compression/compression_args.cc
   - src/core/lib/compression/compression_internal.cc
   - src/core/lib/compression/message_compress.cc
+  - src/core/lib/compression/null_compressor.cc
   - src/core/lib/compression/stream_compression.cc
   - src/core/lib/compression/stream_compression_gzip.cc
   - src/core/lib/compression/stream_compression_identity.cc
@@ -1800,6 +1802,7 @@ libs:
   - src/core/lib/compression/compression_args.h
   - src/core/lib/compression/compression_internal.h
   - src/core/lib/compression/message_compress.h
+  - src/core/lib/compression/null_compressor.h
   - src/core/lib/compression/stream_compression.h
   - src/core/lib/compression/stream_compression_gzip.h
   - src/core/lib/compression/stream_compression_identity.h
@@ -2069,6 +2072,7 @@ libs:
   - src/core/lib/compression/compression_args.cc
   - src/core/lib/compression/compression_internal.cc
   - src/core/lib/compression/message_compress.cc
+  - src/core/lib/compression/null_compressor.cc
   - src/core/lib/compression/stream_compression.cc
   - src/core/lib/compression/stream_compression_gzip.cc
   - src/core/lib/compression/stream_compression_identity.cc
