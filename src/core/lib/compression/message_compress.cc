@@ -191,10 +191,8 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
   return 0;
 }
 
-
-
 void CompressorRegistry::register_compressor(Compressor* c) {
-  if (compressors.count(c->encodingType()) == 0 ) {
+  if (compressors.count(c->encodingType()) == 0) {
     compressors[c->encodingType()] = c;
   } else {
     throw std::invalid_argument("compressor registered twice!! bad!");
@@ -202,7 +200,7 @@ void CompressorRegistry::register_compressor(Compressor* c) {
 }
 
 void CompressorRegistry::remove_compressor(std::string encoding_name) {
-  if (compressors.count(encoding_name) == 0 ) {
+  if (compressors.count(encoding_name) == 0) {
     throw std::invalid_argument("compressor not registered ");
   }
   compressors.erase(encoding_name);
@@ -218,10 +216,12 @@ void NullCompressor::start() {}
 
 void NullCompressor::stop() {}
 
-int NullCompressor::msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+int NullCompressor::msg_compress(grpc_slice_buffer* input,
+                                 grpc_slice_buffer* output) {
   return copy(input, output);
 }
 
-int NullCompressor::msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+int NullCompressor::msg_decompress(grpc_slice_buffer* input,
+                                   grpc_slice_buffer* output) {
   return copy(input, output);
 }
