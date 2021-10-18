@@ -67,6 +67,47 @@ class Compressor {
                              grpc_slice_buffer* output) = 0;
 };
 
+/* A Compressor that copies input to output, not compressing or decompressing
+ * anything. */
+class NoopCompressor : public Compressor {
+ public:
+  std::string encodingType();
+
+  void start();
+
+  void stop();
+
+  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+
+  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+};
+
+class DeflateCompressor : public Compressor {
+ public:
+  std::string encodingType();
+
+  void start();
+
+  void stop();
+
+  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+
+  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+};
+
+class GzipCompressor : public Compressor {
+ public:
+  std::string encodingType();
+
+  void start();
+
+  void stop();
+
+  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+
+  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+};
+
 class CompressorRegistry {
  public:
   static CompressorRegistry& getInstance() {
@@ -79,25 +120,17 @@ class CompressorRegistry {
   void remove_compressor(std::string encoding_type);
 
  private:
-  CompressorRegistry() {}
+  CompressorRegistry() {
+    // register the built-in compressors
+    // TODO (mattbrown) not sure if using 'new' here is legit
+    register_compressor(new NoopCompressor{});
+    register_compressor(new DeflateCompressor{});
+    register_compressor(new GzipCompressor{});
+  }
   CompressorRegistry(CompressorRegistry const&) = delete;
   void operator=(CompressorRegistry const&) = delete;
 
   std::unordered_map<std::string, Compressor*> compressors;
-};
-
-/* A Compressor that does nothing */
-class NullCompressor : public Compressor {
- public:
-  std::string encodingType();
-
-  void start();
-
-  void stop();
-
-  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
-
-  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
 };
 
 #endif /* GRPC_CORE_LIB_COMPRESSION_MESSAGE_COMPRESS_H */

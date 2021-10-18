@@ -312,14 +312,18 @@ static void test_bad_decompression_algorithm(void) {
 }
 
 static void test_compressor_registry(void) {
-  NullCompressor null_compressor;
-  CompressorRegistry::getInstance().register_compressor(&null_compressor);
+  CompressorRegistry& registry = CompressorRegistry::getInstance();
+  // test that NULL is returned for unregistered compressors, assuming this name
+  // is never used
+  GPR_ASSERT(registry.get_compressor("fake-should-not-exist") == NULL);
 
-  GPR_ASSERT((Compressor*)&null_compressor ==
-             CompressorRegistry::getInstance().get_compressor("null"));
+  // test that the built-in compressors are registered
+  GPR_ASSERT(registry.get_compressor("noop") != NULL);
+  GPR_ASSERT(registry.get_compressor("deflate") != NULL);
+  GPR_ASSERT(registry.get_compressor("gzip") != NULL);
 }
 
-static void test_null_compressor(void) {
+static void test_noop_compressor(void) {
   grpc_slice_buffer input;
   grpc_slice_buffer output;
   int was_compressed;
@@ -329,11 +333,11 @@ static void test_null_compressor(void) {
 
   grpc_slice_buffer_init(&output);
 
-  NullCompressor null_compressor;
+  NoopCompressor null_compressor;
   was_compressed = null_compressor.msg_compress(&input, &output);
   GPR_ASSERT(1 == was_compressed);
 
-  // NullCompressor just copies input into output, so the values should be the
+  // NoopCompressor just copies input into output, so the values should be the
   // same
   GPR_ASSERT(input.count == output.count);
   // TODO (mattbrown) is there a more conventional way to test equality of two
@@ -358,7 +362,7 @@ int main(int argc, char** argv) {
   grpc_init();
 
   test_compressor_registry();
-  test_null_compressor();
+  test_noop_compressor();
 
   for (i = 0; i < GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT; i++) {
     for (j = 0; j < GPR_ARRAY_SIZE(uncompressed_split_modes); j++) {
