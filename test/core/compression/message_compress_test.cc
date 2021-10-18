@@ -17,7 +17,6 @@
  */
 
 #include "src/core/lib/compression/message_compress.h"
-#include "src/core/lib/compression/null_compressor.h"
 
 #include <stdlib.h>
 #include <string.h>

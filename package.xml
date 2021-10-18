@@ -750,8 +750,6 @@
     <file baseinstalldir="/" name="src/core/lib/compression/compression_internal.h" role="src" />
     <file baseinstalldir="/" name="src/core/lib/compression/message_compress.cc" role="src" />
     <file baseinstalldir="/" name="src/core/lib/compression/message_compress.h" role="src" />
-    <file baseinstalldir="/" name="src/core/lib/compression/null_compressor.cc" role="src" />
-    <file baseinstalldir="/" name="src/core/lib/compression/null_compressor.h" role="src" />
     <file baseinstalldir="/" name="src/core/lib/compression/stream_compression.cc" role="src" />
     <file baseinstalldir="/" name="src/core/lib/compression/stream_compression.h" role="src" />
     <file baseinstalldir="/" name="src/core/lib/compression/stream_compression_gzip.cc" role="src" />

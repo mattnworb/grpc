@@ -211,3 +211,17 @@ void CompressorRegistry::remove_compressor(std::string encoding_name) {
 Compressor* CompressorRegistry::get_compressor(std::string encoding_name) {
   return compressors[encoding_name];
 }
+
+std::string NullCompressor::encodingType() { return "null"; }
+
+void NullCompressor::start() {}
+
+void NullCompressor::stop() {}
+
+int NullCompressor::msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+  return copy(input, output);
+}
+
+int NullCompressor::msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+  return copy(input, output);
+}
