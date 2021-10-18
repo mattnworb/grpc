@@ -53,7 +53,7 @@ class Compressor {
   // - decompress message
 
  public:
-  // TODO: proper return type for plain strings in this codebase
+  // TODO(unknown): proper return type for plain strings in this codebase
   virtual std::string encodingType() = 0;
 
   virtual void start() = 0;
@@ -71,66 +71,69 @@ class Compressor {
  * anything. */
 class NoopCompressor : public Compressor {
  public:
-  std::string encodingType();
+  std::string encodingType() override;
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_compress(grpc_slice_buffer* input,
+                   grpc_slice_buffer* output) override;
 
-  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_decompress(grpc_slice_buffer* input,
+                     grpc_slice_buffer* output) override;
 };
 
 class DeflateCompressor : public Compressor {
  public:
-  std::string encodingType();
+  std::string encodingType() override;
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_compress(grpc_slice_buffer* input,
+                   grpc_slice_buffer* output) override;
 
-  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_decompress(grpc_slice_buffer* input,
+                     grpc_slice_buffer* output) override;
 };
 
 class GzipCompressor : public Compressor {
  public:
-  std::string encodingType();
+  std::string encodingType() override;
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_compress(grpc_slice_buffer* input,
+                   grpc_slice_buffer* output) override;
 
-  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_decompress(grpc_slice_buffer* input,
+                     grpc_slice_buffer* output) override;
 };
 
 class CompressorRegistry {
  public:
   static CompressorRegistry* getInstance() {
-    static CompressorRegistry instance;
-    return &instance;
-  }
+    staencoding_namerRegistry instance;
+    return &instanceencoding_name register_compressor(Compressor * c);
+    Compressor* get_compressor(std::string encoding_type);
+    void remove_compressor(std::string encoding_type);
 
-  void register_compressor(Compressor* c);
-  Compressor* get_compressor(std::string encoding_type);
-  void remove_compressor(std::string encoding_type);
+   private:
+    CompressorRegistry() {
+      // register the built-in compressors
+      // TODO (mattbrown) not sure if using 'new' here is legit
+      register_compressor(new NoopCompressor{});
+      register_compressor(new DeflateCompressor{});
+      register_compressor(new GzipCompressor{});
+    }
+    CompressorRegistry(CompressorRegistry const&) = delete;
+    void operator=(CompressorRegistry const&) = delete;
 
- private:
-  CompressorRegistry() {
-    // register the built-in compressors
-    // TODO (mattbrown) not sure if using 'new' here is legit
-    register_compressor(new NoopCompressor{});
-    register_compressor(new DeflateCompressor{});
-    register_compressor(new GzipCompressor{});
-  }
-  CompressorRegistry(CompressorRegistry const&) = delete;
-  void operator=(CompressorRegistry const&) = delete;
-
-  std::unordered_map<std::string, Compressor*> compressors;
-};
+    std::unordered_map<std::string, Compressor*> compressors;
+  };
 
 #endif /* GRPC_CORE_LIB_COMPRESSION_MESSAGE_COMPRESS_H */
