@@ -53,7 +53,7 @@ class Compressor {
   // - decompress message
 
  public:
-  // TODO: proper return type for plain strings in this codebase
+  // TODO(unknown): proper return type for plain strings in this codebase
   virtual std::string encodingType() = 0;
 
   virtual void start() = 0;
@@ -75,8 +75,8 @@ class CompressorRegistry {
   }
 
   void register_compressor(Compressor* c);
-  Compressor* get_compressor(std::string encoding_type);
-  void remove_compressor(std::string encoding_type);
+  Compressor* get_compressor(stdencoding_nameding_type);
+  void remove_compressor(stdencoding_nameding_type);
 
  private:
   CompressorRegistry() {}
@@ -89,15 +89,17 @@ class CompressorRegistry {
 /* A Compressor that does nothing */
 class NullCompressor : public Compressor {
  public:
-  std::string encodingType();
+  std::string encodingType() override;
 
-  void start();
+  void start() override;
 
-  void stop();
+  void stop() override;
 
-  int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_compress(grpc_slice_buffer* input,
+                   grpc_slice_buffer* output) override;
 
-  int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output);
+  int msg_decompress(grpc_slice_buffer* input,
+                     grpc_slice_buffer* output) override;
 };
 
 #endif /* GRPC_CORE_LIB_COMPRESSION_MESSAGE_COMPRESS_H */
