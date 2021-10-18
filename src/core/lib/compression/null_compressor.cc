@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <grpc/impl/codegen/port_platform.h>
+
 //#include "src/core/lib/compression/message_compress.h"
 #include "src/core/lib/compression/null_compressor.h"
 //#include <string>
-
 
 std::string NullCompressor::encodingType() { return "null"; }
 
@@ -23,10 +24,12 @@ void NullCompressor::start() {}
 
 void NullCompressor::stop() {}
 
-int NullCompressor::msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+int NullCompressor::msg_compress(grpc_slice_buffer* input,
+                                 grpc_slice_buffer* output) {
   return copy(input, output);
 }
 
-int NullCompressor::msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output) {
+int NullCompressor::msg_decompress(grpc_slice_buffer* input,
+                                   grpc_slice_buffer* output) {
   return copy(input, output);
 }

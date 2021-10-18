@@ -15,6 +15,8 @@
 #ifndef GRPC_CORE_LIB_COMPRESSION_NULL_COMPRESSOR_H
 #define GRPC_CORE_LIB_COMPRESSION_NULL_COMPRESSOR_H
 
+#include <grpc/impl/codegen/port_platform.h>
+
 #include "src/core/lib/compression/message_compress.h"
 
 /* A Compressor that does nothing */

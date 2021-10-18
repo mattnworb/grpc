@@ -21,14 +21,14 @@
 
 #include <grpc/support/port_platform.h>
 
+#include <string>
+#include <unordered_map>
+
 #include <grpc/slice_buffer.h>
 
 #include "src/core/lib/compression/compression_internal.h"
 
-#include <string>
-#include <unordered_map>
-
-//using namespace std;
+// using namespace std;
 
 /* compress 'input' to 'output' using 'algorithm'.
    On success, appends compressed slices to output and returns 1.
@@ -46,35 +46,37 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
 int copy(grpc_slice_buffer* input, grpc_slice_buffer* output);
 
 class Compressor {
-   // 5 methods
-   // - identity / name of algo
-   // - lifecycle methods: stop and start
-   // - compress message
-   // - decompress message
+  // 5 methods
+  // - identity / name of algo
+  // - lifecycle methods: stop and start
+  // - compress message
+  // - decompress message
 
-   public:
-      // TODO: proper return type for plain strings in this codebase
-      virtual std::string encodingType() = 0;
+ public:
+  // TODO(unknown): proper return type for plain strings in this codebase
+  virtual std::string encodingType() = 0;
 
-      virtual void start() = 0;
+  virtual void start() = 0;
 
-      virtual void stop() = 0;
+  virtual void stop() = 0;
 
-      virtual int msg_compress(grpc_slice_buffer* input, grpc_slice_buffer* output) = 0;
+  virtual int msg_compress(grpc_slice_buffer* input,
+                           grpc_slice_buffer* output) = 0;
 
-      virtual int msg_decompress(grpc_slice_buffer* input, grpc_slice_buffer* output) = 0;
+  virtual int msg_decompress(grpc_slice_buffer* input,
+                             grpc_slice_buffer* output) = 0;
 };
 
 class CompressorRegistry {
  public:
   static CompressorRegistry& getInstance() {
-     static CompressorRegistry instance;
-     return instance;
+    static CompressorRegistry instance;
+    return instance;
   }
 
   void register_compressor(Compressor* c);
-  Compressor* get_compressor(std::string encoding_type);
-  void remove_compressor(std::string encoding_type);
+  Compressor* get_compressor(stdencoding_nameding_type);
+  void remove_compressor(stdencoding_nameding_type);
 
  private:
   CompressorRegistry() {}
