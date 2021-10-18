@@ -150,15 +150,18 @@ int copy(grpc_slice_buffer* input, grpc_slice_buffer* output) {
 
 static int compress_inner(grpc_message_compression_algorithm algorithm,
                           grpc_slice_buffer* input, grpc_slice_buffer* output) {
+  Compressor* c;
   switch (algorithm) {
     case GRPC_MESSAGE_COMPRESS_NONE:
       /* the fallback path always needs to be send uncompressed: we simply
          rely on that here */
       return 0;
     case GRPC_MESSAGE_COMPRESS_DEFLATE:
-      return zlib_compress(input, output, 0);
+      c = CompressorRegistry::getInstance().get_compressor("deflate");
+      return c->msg_compress(input, output);
     case GRPC_MESSAGE_COMPRESS_GZIP:
-      return zlib_compress(input, output, 1);
+      c = CompressorRegistry::getInstance().get_compressor("gzip");
+      return c->msg_compress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
@@ -177,13 +180,16 @@ int grpc_msg_compress(grpc_message_compression_algorithm algorithm,
 
 int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
                         grpc_slice_buffer* input, grpc_slice_buffer* output) {
+  Compressor* c;
   switch (algorithm) {
     case GRPC_MESSAGE_COMPRESS_NONE:
       return copy(input, output);
     case GRPC_MESSAGE_COMPRESS_DEFLATE:
-      return zlib_decompress(input, output, 0);
+      c = CompressorRegistry::getInstance().get_compressor("deflate");
+      return c->msg_decompress(input, output);
     case GRPC_MESSAGE_COMPRESS_GZIP:
-      return zlib_decompress(input, output, 1);
+      c = CompressorRegistry::getInstance().get_compressor("gzip");
+      return c->msg_decompress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
   }
