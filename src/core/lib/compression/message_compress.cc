@@ -210,18 +210,18 @@ Compressor* CompressorRegistry::get_compressor(std::string encoding_name) {
   return compressors[encoding_name];
 }
 
-std::string NullCompressor::encodingType() { return "null"; }
+std::string NoopCompressor::encodingType() { return "null"; }
 
-void NullCompressor::start() {}
+void NoopCompressor::start() {}
 
-void NullCompressor::stop() {}
+void NoopCompressor::stop() {}
 
-int NullCompressor::msg_compress(grpc_slice_buffer* input,
+int NoopCompressor::msg_compress(grpc_slice_buffer* input,
                                  grpc_slice_buffer* output) {
   return copy(input, output);
 }
 
-int NullCompressor::msg_decompress(grpc_slice_buffer* input,
+int NoopCompressor::msg_decompress(grpc_slice_buffer* input,
                                    grpc_slice_buffer* output) {
   return copy(input, output);
 }

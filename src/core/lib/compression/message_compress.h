@@ -86,8 +86,9 @@ class CompressorRegistry {
   std::unordered_map<std::string, Compressor*> compressors;
 };
 
-/* A Compressor that does nothing */
-class NullCompressor : public Compressor {
+/* A Compressor that copies input to output, not compressing or decompressing
+ * anything. */
+class NoopCompressor : public Compressor {
  public:
   std::string encodingType();
 
