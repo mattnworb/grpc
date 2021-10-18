@@ -110,9 +110,9 @@ class GzipCompressor : public Compressor {
 
 class CompressorRegistry {
  public:
-  static CompressorRegistry& getInstance() {
+  static CompressorRegistry* getInstance() {
     static CompressorRegistry instance;
-    return instance;
+    return &instance;
   }
 
   void register_compressor(Compressor* c);

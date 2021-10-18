@@ -157,10 +157,10 @@ static int compress_inner(grpc_message_compression_algorithm algorithm,
          rely on that here */
       return 0;
     case GRPC_MESSAGE_COMPRESS_DEFLATE:
-      c = CompressorRegistry::getInstance().get_compressor("deflate");
+      c = CompressorRegistry::getInstance()->get_compressor("deflate");
       return c->msg_compress(input, output);
     case GRPC_MESSAGE_COMPRESS_GZIP:
-      c = CompressorRegistry::getInstance().get_compressor("gzip");
+      c = CompressorRegistry::getInstance()->get_compressor("gzip");
       return c->msg_compress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
@@ -185,10 +185,10 @@ int grpc_msg_decompress(grpc_message_compression_algorithm algorithm,
     case GRPC_MESSAGE_COMPRESS_NONE:
       return copy(input, output);
     case GRPC_MESSAGE_COMPRESS_DEFLATE:
-      c = CompressorRegistry::getInstance().get_compressor("deflate");
+      c = CompressorRegistry::getInstance()->get_compressor("deflate");
       return c->msg_decompress(input, output);
     case GRPC_MESSAGE_COMPRESS_GZIP:
-      c = CompressorRegistry::getInstance().get_compressor("gzip");
+      c = CompressorRegistry::getInstance()->get_compressor("gzip");
       return c->msg_decompress(input, output);
     case GRPC_MESSAGE_COMPRESS_ALGORITHMS_COUNT:
       break;
