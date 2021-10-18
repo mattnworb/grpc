@@ -315,12 +315,12 @@ static void test_compressor_registry(void) {
   CompressorRegistry& registry = CompressorRegistry::getInstance();
   // test that NULL is returned for unregistered compressors, assuming this name
   // is never used
-  GPR_ASSERT(registry.get_compressor("fake-should-not-exist") == NULL);
+  GPR_ASSERT(registry.get_compressor("fake-should-not-exist") == nullptr);
 
   // test that the built-in compressors are registered
-  GPR_ASSERT(registry.get_compressor("noop") != NULL);
-  GPR_ASSERT(registry.get_compressor("deflate") != NULL);
-  GPR_ASSERT(registry.get_compressor("gzip") != NULL);
+  GPR_ASSERT(registry.get_compressor("noop") != nullptr);
+  GPR_ASSERT(registry.get_compressor("deflate") != nullptr);
+  GPR_ASSERT(registry.get_compressor("gzip") != nullptr);
 }
 
 static void test_noop_compressor(void) {
